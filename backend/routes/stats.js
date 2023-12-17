@@ -1,5 +1,5 @@
 const express = require('express');
-
+const Goal = require('../models/goalModel')
 const router = express.Router()
 
 // GET all goals
@@ -13,8 +13,14 @@ router.get('/:id', (req, res) => {
 })
 
 // POST a new goal
-router.post('/', (req, res) => {
-    res.json({messg: 'POST a new goal'})
+router.post('/', async (req, res) => {
+    const {goalType, goalDate} = req.body
+    try{
+        const goal = await Goal.create({goalType, goalDate})
+        res.status(200).json(goal)
+    } catch(error){
+        res.status(400).json({error: error.message})
+    }
 })
 
 // UPDATE a goal
