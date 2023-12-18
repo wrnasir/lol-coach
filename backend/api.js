@@ -1,4 +1,5 @@
-/**
- * Will contain future API Code
- */
+require('dotenv').config()
 
+const getSummonerByName = async(url) > {
+    
+}
